@@ -8,8 +8,8 @@
 int main()
 {
     Map::Map2D map;
-    map.initialize(1, 123456u); // initialize the map with perlinnoise with the seed 123456u.
-
+    map.initialize(2, 123456u); // initialize the map with perlinnoise with the seed 123456u.
+    map.cellularAutomaton();
     getchar();
     getchar();
     return 0;
