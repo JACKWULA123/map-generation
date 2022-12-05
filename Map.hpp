@@ -21,17 +21,59 @@ namespace Map
     {
     private:
         double map[kDefaultMapSize][kDefaultMapSize]; // map matrix. current: >0.5 seawater
-    public:                                           //                      <0.5 land
+                                                      //                      <0.5 land
+
+    public:
         // constructor with size.
         Map2D() {}
         // destructor.
         ~Map2D() {}
 
+        void save(char *_id)
+        {
+
+            FILE *file = fopen(_id, "w");
+
+            for (int i = 1; i <= kDefaultMapSize - 2; i++)
+            {
+                fprintf(file, "--");
+            }
+            fprintf(file, "\n");
+            for (int i = 1; i < kDefaultMapSize - 1; i++)
+            {
+                fprintf(file, "|");
+                for (int j = 1; j < kDefaultMapSize - 1; j++)
+                {
+                    if (map[i][j] >= 0.5)
+                    {
+                        fprintf(file, "##");
+                    }
+                    else
+                    {
+                        fprintf(file, "  ");
+                    }
+                }
+                fprintf(file, "|");
+                fprintf(file, "\n");
+            }
+            for (int i = 1; i <= kDefaultMapSize - 2; i++)
+            {
+                fprintf(file, "--");
+            }
+            fclose(file);
+        }
+
         void print() // print the map
         {
             system("cls");
+            for (int i = 1; i <= kDefaultMapSize - 2; i++)
+            {
+                printf("--");
+            }
+            printf("\n");
             for (int i = 1; i < kDefaultMapSize - 1; i++)
             {
+                printf("|");
                 for (int j = 1; j < kDefaultMapSize - 1; j++)
                 {
                     if (map[i][j] >= 0.5)
@@ -43,7 +85,12 @@ namespace Map
                         printf("  ");
                     }
                 }
+                printf("|");
                 printf("\n");
+            }
+            for (int i = 1; i <= kDefaultMapSize - 2; i++)
+            {
+                printf("--");
             }
         }
 
@@ -72,6 +119,9 @@ namespace Map
             else if (_k == 2)
             {
                 srand((unsigned int)time(NULL));
+                // id[0] = char(rand() % 100);
+                // id[1] = char(rand() % 100);
+                // id[2] = char(rand() % 100);
                 for (int i = 0; i <= kDefaultMapSize - 1; i++)
                 {
                     for (int j = 0; j <= kDefaultMapSize - 1; j++)
@@ -82,7 +132,7 @@ namespace Map
                         }
                         else
                         {
-                            if (rand() % 100 < 64)
+                            if (rand() % 100 < 63)
                             {
                                 map[i][j] = 0.6;
                             }
@@ -93,6 +143,7 @@ namespace Map
                         }
                     }
                 }
+                save("_map.txt");
             }
 
             print();
@@ -142,6 +193,7 @@ namespace Map
                 }
                 print();
             }
+            save("map.txt");
         }
     };
 } // namespace Map
