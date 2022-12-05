@@ -132,7 +132,7 @@ namespace Map
                         }
                         else
                         {
-                            if (rand() % 100 < 63)
+                            if (rand() % 100 < 63) //这个63是陆地覆盖率，越高陆地比例越高。
                             {
                                 map[i][j] = 0.6;
                             }

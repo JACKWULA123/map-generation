@@ -10,4 +10,5 @@ a simple map generation algorithm with cellular automaton.
     用txt凑活凑活的样子。
 ## 如何使用
     编译运行 main.cpp即可
+    地图大小在Map.hpp中的宏定义kDefaultSize
 
